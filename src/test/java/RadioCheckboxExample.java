@@ -69,6 +69,31 @@ public class RadioCheckboxExample {
             driver.findElement(By.xpath("//label[@for='j_idt87:age:0']")).click();
         }
     }
+    @Test
+
+    public void CheckBoxTest(){
+
+        //1) select wanted checkboxes and verifying those checkboxes status
+
+        driver.get("https://www.leafground.com/checkbox.xhtml;jsessionid=node01xpn2aktug1g7jiheij6i82ga2742578.node0");
+
+        List<WebElement> checkBoxes = driver.findElements(By.xpath("//table[@id='j_idt87:basic']//label"));
+        for (WebElement element:checkBoxes){
+            if (!(element.getText().equals("Others")))
+                element.click();
+        }
+
+        for (int i=1; i<=checkBoxes.size(); i++){
+            boolean CheckBoxStatus = driver.findElement(By.xpath("(//table[@id='j_idt87:basic']//input)[" + i+ "]")).isSelected();
+            System.out.println("CheckBox " +i + " selected status is : " + CheckBoxStatus);
+        }
+
+
+    }
+
+
+
+
 
 
 
