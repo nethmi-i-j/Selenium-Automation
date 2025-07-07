@@ -59,13 +59,7 @@ public class Windows {
 //        }
 
 
-        //2) find the number of opened tabs
 
-        WebElement multiWindowButton = driver.findElement(By.xpath("//*[@id='j_idt88:j_idt91']"));
-        multiWindowButton.click();
-        Set<String> multiWindows = driver.getWindowHandles();
-        int NoOfWindows = multiWindows.size();
-        System.out.println("no. of windows: "+NoOfWindows);
 
         //2) find the number of opened tabs
 
