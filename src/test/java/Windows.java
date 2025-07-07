@@ -48,6 +48,28 @@ public class Windows {
         boolean OpenButtonVisibility = openButton2.isDisplayed();
         System.out.println("Open button visibility: "+OpenButtonVisibility);
 
+        // second method - using list
+
+//        List<String> list = new ArrayList<String>(handles);  //converting set to list
+//        if (list.size() >1) {
+//            driver.switchTo().window(list.get(1));
+//            System.out.println("page title is: "+driver.getTitle());  //title should be child child window's
+//            driver.close();
+//            driver.switchTo().window(parentWindow);
+//        }
+
+        //2) find the number of opened tabs
+
+        WebElement multiWindowButton = driver.findElement(By.xpath("//*[@id=\"j_idt88:j_idt91\"]"));
+        multiWindowButton.click();
+        Set<String> multiWindows = driver.getWindowHandles();
+        int NoOfWindows = multiWindows.size();
+        System.out.println("no. of windows: "+NoOfWindows);
+
+
+
+
+
 
     }
 }
