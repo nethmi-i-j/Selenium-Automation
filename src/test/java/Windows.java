@@ -29,13 +29,13 @@ public class Windows {
         openButton.click();
 
         Set<String> handles = driver.getWindowHandles();
-        System.out.println("no.of windows opened: "+ handles.size());  //since only parent and one window
+        System.out.println("no.of windows opened: "+ handles.size());  //since only parent and one window, size=2
 
         // First method - using forEach loop
         for(String newWindow : handles){
             System.out.println(newWindow);   //for loop ends on the child window
             driver.switchTo().window(newWindow);
-            System.out.println("page title is: "+driver.getTitle());  //title of child window
+            System.out.println("page title is: "+driver.getTitle());
         }
         driver.close();  //redirect to parent window
 
@@ -68,6 +68,19 @@ public class Windows {
         Set<String> multipleWindows = driver.getWindowHandles();
         int noOfWindows = multipleWindows.size();
         System.out.println("No of windows opened: "+noOfWindows);
+
+        //3) close all windows except parent window
+
+        WebElement closeWidowButton = driver.findElement(By.id("j_idt88:j_idt93"));
+        closeWidowButton.click();
+
+        Set<String> allWindows = driver.getWindowHandles();
+        for (String windows : allWindows){
+            if (!windows.equals(parentWindow)){
+                driver.switchTo().window(windows);
+                driver.close();
+            }
+        }
 
 
 
