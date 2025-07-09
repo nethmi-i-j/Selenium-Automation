@@ -4,6 +4,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.BeforeMethod;
 
+import java.util.List;
+
 public class FrameExample {
 
     WebDriver driver;
@@ -45,14 +47,22 @@ public class FrameExample {
         String clickButton3 = buttton3.getText();
         System.out.println("After click inside nested frame button text: "+clickButton3);
 
+        // count of frames in this page
+
+        driver.switchTo().defaultContent();  // switch to main html page from frame 4
+
+        List<WebElement> allframes = driver.findElements(By.tagName("iframe"));
+        int countOfFrames = allframes.size();
+        System.out.println("No. of frames in this page: "+ countOfFrames);
+
+        for (WebElement framesOnebyOne :allframes){
+            String frameSrc = framesOnebyOne.getAttribute("src");
+            System.out.println("frame src values: "+frameSrc);
+
+        }
 
 
 
-
-
-
-
-        
 
     }
 }
