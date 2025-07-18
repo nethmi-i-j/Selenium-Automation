@@ -38,6 +38,23 @@ public class MouseInteractions {
         //actions.clickAndHold(from).moveToElement(to).release(to).perform(); // ist way
         actions.dragAndDrop(from,to).perform(); //second way
 
+        // 3) Slider operation
+
+        WebElement sliderPoint1 = driver.findElement(By.xpath("//*[@id='form:j_idt125']/span[1]"));
+        System.out.println("location of slider point before moving: "+ sliderPoint1.getLocation());
+
+        actions.dragAndDropBy(sliderPoint1,50,0).perform();
+        System.out.println("location of slider point after moving: "+ sliderPoint1.getLocation());
+
+        WebElement slider = driver.findElement(By.xpath("//*[@id='j_idt45']"));
+        System.out.println("location of slider before moving: "+ slider.getLocation());
+
+        actions.dragAndDropBy(slider,0,-20).perform();
+        System.out.println("location of slider before moving: "+ slider.getLocation());
+
+
+
+
 
 
 
