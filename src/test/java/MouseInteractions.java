@@ -1,5 +1,6 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.BeforeMethod;
@@ -24,9 +25,23 @@ public class MouseInteractions {
         // 1) Move to element operation
 
         Actions actions = new Actions(driver);
+
         actions.moveToElement(driver.findElement(By.id("menuform:j_idt37")))
                 .moveToElement(driver.findElement(By.id("menuform:j_idt38")))
                 .moveToElement(driver.findElement(By.id("menuform:j_idt39"))).perform();
+
+        // 2) Drag and drop operation
+
+        WebElement from = driver.findElement(By.id("form:drag"));
+        WebElement to = driver.findElement(By.id("form:drop"));
+
+        //actions.clickAndHold(from).moveToElement(to).release(to).perform(); // ist way
+        actions.dragAndDrop(from,to).perform(); //second way
+
+
+
+
+
 
     }
     @Test
