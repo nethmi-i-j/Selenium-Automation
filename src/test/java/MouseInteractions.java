@@ -1,3 +1,4 @@
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -52,18 +53,29 @@ public class MouseInteractions {
         actions.dragAndDropBy(slider,0,-20).perform();
         System.out.println("location of slider before moving: "+ slider.getLocation());
 
-
-
-
-
-
-
-
-
     }
+
     @Test
 
     public void MouseOperationsTest2(){
-        driver.get("https://leafground.com/drag.xhtml");
+        driver.get("https://swisnl.github.io/jQuery-contextMenu/demo.html");
+
+        // 4) Right click
+
+        WebElement rightClickButton = driver.findElement(By.xpath("/html/body/div/section/div/div/div/p/span"));
+
+        Actions actions1 = new Actions(driver);
+
+        actions1.contextClick(rightClickButton).perform();   //actions1.doubleClik().perform();
+
+        driver.findElement(By.xpath("//span[text()='Edit']")).click();
+        Alert alertPop = driver.switchTo().alert();
+        System.out.println("Alert text is: " + alertPop.getText());
+        alertPop.accept();
+
+
+
+
+
     }
 }
