@@ -8,6 +8,8 @@ import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.List;
+
 public class KeyBoardActions {
 
     WebDriver driver;
@@ -41,6 +43,24 @@ public class KeyBoardActions {
 
         // to write capital in a textbox
         actions.keyDown(textBox,Keys.SHIFT).sendKeys("hello").perform();
+    }
+    @Test
+    public void keyBoardTest2() throws InterruptedException {
+        driver.get("https://leafground.com/list.xhtml");
+        Thread.sleep(4000);
+
+        // select a list by using control key
+        List<WebElement> list = driver.findElements(By.xpath("//ul[@aria-label='From']/li"));
+        int size = list.size();
+        System.out.println("list count is: " + size);
+
+        Actions actions = new Actions(driver);
+        actions.keyDown(Keys.CONTROL)
+                .click(list.get(0))
+                .click(list.get(1))
+                .click(list.get(2))
+                .perform();
+
 
     }
 }
