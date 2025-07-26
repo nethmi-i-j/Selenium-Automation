@@ -5,6 +5,9 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.awt.*;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
 import java.io.File;
 
 public class DownloadUploadFiles {
@@ -34,6 +37,37 @@ public class DownloadUploadFiles {
                 break;
             }
         }
+
+    }
+    @Test
+
+    public void FileUploadTest() throws AWTException {
+        driver.get("https://leafground.com/file.xhtml");
+
+        // 1st way - using Robot class
+        WebElement uploadButton = driver.findElement(By.id("j_idt88:j_idt89"));
+        uploadButton.click();
+
+        // windows control begin here (selenium no more can't use here)
+
+        String data = "C:\\Users\\user\\Downloads\\TestLeaf Logo.png"; //store the file's name which is want to upload, as string variable
+        StringSelection selection = new StringSelection(data); //convert string(path of the file) into plain text (transferable content)
+
+        Toolkit.getDefaultToolkit().getSystemClipboard().setContents(selection,null); //copying the path to clipboard
+
+        Robot robot = new Robot();  //can not use Actions class here because this phase under control of the Java (can not do selenium operations here.) Therefore we use Robot class here
+        robot.keyPress(KeyEvent.VK_CONTROL);
+        robot.keyPress(KeyEvent.VK_V);
+        robot.keyRelease(KeyEvent.VK_V);
+        robot.keyRelease(KeyEvent.VK_CONTROL);
+
+        robot.keyPress(KeyEvent.VK_ENTER);
+        robot.keyRelease(KeyEvent.VK_ENTER);
+
+
+
+
+
 
     }
 }
