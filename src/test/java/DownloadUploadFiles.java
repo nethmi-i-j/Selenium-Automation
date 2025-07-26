@@ -64,6 +64,15 @@ public class DownloadUploadFiles {
         robot.keyPress(KeyEvent.VK_ENTER);
         robot.keyRelease(KeyEvent.VK_ENTER);
 
+        // second way - using send keys (applicable only element type (input type=File in code) is file)
+
+        WebElement uploadUsingSendKeys = driver.findElement(By.id("j_idt88:j_idt89_input"));
+        uploadUsingSendKeys.sendKeys(data);
+
+
+
+
+
 
 
 
