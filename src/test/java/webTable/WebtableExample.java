@@ -2,6 +2,7 @@ package webTable;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -62,11 +63,35 @@ public class WebtableExample {
 
             if (productName.equals("Tablet")) {
                 String productPrice = driver.findElement(By.xpath("//table[@id='productTable']/tbody/tr["+i+"]/td[3]")).getText();
-                System.out.println(productName + "relevent product price is: " + productPrice);
+                System.out.println(productName + "Relevent product price is: " + productPrice);
                 break;
 
             }
         }
+
+        //6) select all the check boxes in several pages (Pagination table)
+
+        int pageCount = driver.findElements(By.xpath("//ul[@id='pagination']/li")).size();
+        List<WebElement> pages = driver.findElements(By.xpath("//ul[@id='pagination']/li"));
+
+        for (int k=0; k<pageCount; k++){
+            pages.get(k).click();
+            for (int i=1; i<=rawCount; i++){
+                boolean atb = driver.findElement(By.xpath("//table[@id='productTable']/tbody/tr["+i+"]/td[4]/input")).isSelected();
+                if(!atb){
+                    driver.findElement(By.xpath("//table[@id='productTable']/tbody/tr["+i+"]/td[4]/input")).click();
+                }
+            }
+        }
+
+        // 7) select one checkbox
+        int tblRow = 1;
+        driver.findElement(By.xpath("//table[@id='productTable']/tbody/tr["+tblRow+"]/td[4]/input")).click();
+
+
+
+
+
 
 
     }
