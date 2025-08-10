@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 public class JavaScriptExecuter {
 
     WebDriver driver;
+    JavascriptExecutor jsExecutor;
 
     @BeforeMethod
 
@@ -21,7 +22,7 @@ public class JavaScriptExecuter {
 
     public void JsExecutorTests() throws InterruptedException {
 
-        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        jsExecutor = (JavascriptExecutor) driver;
 
 
         // 1) get a alert box in to web page using javaScript
@@ -51,10 +52,47 @@ public class JavaScriptExecuter {
         Thread.sleep(4000);
 
         // 5) scrolling the page
-
+        scrollPage();
 
         // 6) set all attributes from a wanted element
+        getAllAttributes(textBox);
+
+
+
+    }
+
+    public void scrollPage() throws InterruptedException {
+
+        //5.1) scroll to some position
+        jsExecutor.executeScript("window.scrollTo(0, 1000);");  //(x,y) in pixel
+        System.out.println("current page Y offset value is: " + jsExecutor.executeScript("return window.pageYOffset;"));
+        Thread.sleep(5000);
+
+        jsExecutor.executeScript("window.scrollTo(0, -1000);");  //back to initial position
+
+        //5.2) scroll to bottom of the page by pixel number
+        jsExecutor.executeScript("window.scrollTo(0, document.body.scrollHeight);");
+        Thread.sleep(5000);
+
+        //5.3) scroll to the top of the page
+        jsExecutor.executeScript("window.scrollTo(0,0);");
+        Thread.sleep(5000);
+
+        //5.4) scroll the page till element is visible
+        WebElement scrollElement = driver.findElement(By.xpath("//*[@id='post-body-1307673142697428135']/div[3]/label"));
+        jsExecutor.executeScript("arguments[0].scrollInToView(True);", scrollElement);
+
+    }
+
+    public String getAllAttributes(WebElement webElement) {
+        Object elementAttributes = jsExecutor.executeScript("var items = {}; for (index = 0; index< arguments[0].attributes.length; ++index) { items[arguments[0].attributes[index].name]",webElement);
+        System.out.println("all attributes values are: " + elementAttributes.toString());
+        return elementAttributes.toString();
+
     }
 
 
 }
+
+
+
