@@ -26,7 +26,7 @@ public class JavaScriptExecuter {
 
 
         // 1) get a alert box in to web page using javaScript
-        jsExecutor.executeScript("alert('hello');");
+        //jsExecutor.executeScript("alert('hello');");
 
         // 2) set a input value in a text box using javaScript Executor
 
@@ -35,7 +35,7 @@ public class JavaScriptExecuter {
         jsExecutor.executeScript("arguments[0].value='Hansi';",textBox);
 
            // 2.2) way 2 - set the value using setAttribute (alternative way)
-        jsExecutor.executeScript("arguments[0].setAttribute('value','Hansi');",textBox);
+        //jsExecutor.executeScript("arguments[0].setAttribute('value','Hansi');",textBox);
 
         Thread.sleep(4000);
 
@@ -54,10 +54,17 @@ public class JavaScriptExecuter {
         // 5) scrolling the page
         scrollPage();
 
+
         // 6) set all attributes from a wanted element
         getAllAttributes(textBox);
 
+        // 7) reload the page
+        jsExecutor.executeScript("location.reload();");
 
+        //jsExecutor.executeScript("history.go(0);");  <--- another method
+
+        // 8) zoom the page
+        jsExecutor.executeScript("document.body.style.zoom='150%';");
 
     }
 
@@ -79,8 +86,9 @@ public class JavaScriptExecuter {
         Thread.sleep(5000);
 
         //5.4) scroll the page till element is visible
-        WebElement scrollElement = driver.findElement(By.xpath("//*[@id='post-body-1307673142697428135']/div[3]/label"));
-        jsExecutor.executeScript("arguments[0].scrollInToView(True);", scrollElement);
+        WebElement scrollElement = driver.findElement(By.xpath("//label[text()='Gender:']"));
+        jsExecutor.executeScript("arguments[0].scrollIntoView(true);", scrollElement);
+
 
     }
 
@@ -90,6 +98,8 @@ public class JavaScriptExecuter {
         return elementAttributes.toString();
 
     }
+
+
 
 
 }
