@@ -7,6 +7,11 @@ import org.openqa.selenium.io.FileHandler;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.Dimension;
+import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
@@ -26,7 +31,7 @@ public class TakeScreenshots {
 
     @Test
 
-    public void takeScreenShots() throws IOException {
+    public void takeScreenShots() throws IOException, AWTException {
 
         // 1) capture screenshot of full web page (using FileHandler)
 
@@ -54,6 +59,18 @@ public class TakeScreenshots {
         File source1 = elementOfThePage.getScreenshotAs(OutputType.FILE);
         File target1 = new File(System.getProperty("user.dir") + "\\Screenshot\\" + "alert_element_of_the_web_page.png");
         FileUtils.copyFile(source1,target1);
+
+        // 4)capture screenshot of full entire screen
+
+        Robot robot = new Robot();
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();  //first get the screen size
+        Rectangle rectangle = new Rectangle(screenSize);
+        BufferedImage source2 = robot.createScreenCapture(rectangle);  //get the screenshot as entire screen
+        File destination2 = new File(System.getProperty("user.dir") + "\\Screenshot\\" + "alert_page_entireScreen.png");
+        ImageIO.write(source2,"png",destination2);
+
+
+
 
 
 
